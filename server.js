@@ -1,11 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors')
-require('dotenv').config()
-const db = require('./db/knex')
-const authRouter = require('../backend/routers/auth_router')
+const cookieParser = require('cookie-parser');
+const db = require('./src/backend/db/knex')
+const authRouter = require('./src/backend/routers/auth_router')
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(cookieParser())
 app.use(express.json())
 app.use(cors())
 
