@@ -1,5 +1,5 @@
 const contributorModel = require('../models/contributors_model');
-const userModel = require('../models/user_model');
+const userModel = require('../models/users_model');
 
 const addContributor = async (req, res) => {
   const { story_id, user_id } = req.body;

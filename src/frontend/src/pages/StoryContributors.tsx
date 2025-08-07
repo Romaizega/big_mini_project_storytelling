@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
   fetchContributors,
-  addContributor,
+  addContributorByUsername,
   deleteContributor
 } from '../features/contributors/contributorSlice'
 
@@ -13,17 +13,19 @@ interface Props {
 const StoryContributors = ({ storyId }: Props) => {
   const dispatch = useAppDispatch()
   const { list, status, error } = useAppSelector((state) => state.contributors)
-  const [userId, setUserId] = useState<number | ''>('')
+  const [username, setUsername] = useState('')
 
   useEffect(() => {
     dispatch(fetchContributors(storyId))
   }, [dispatch, storyId])
 
   const handleAdd = () => {
-    if (userId) {
-      dispatch(addContributor({ story_id: storyId, user_id: Number(userId) }))
-        .then(() => dispatch(fetchContributors(storyId)))
-      setUserId('')
+    if (username.trim()) {
+      dispatch(addContributorByUsername({ story_id: storyId, username }))
+        .then(() => {
+          dispatch(fetchContributors(storyId))
+          setUsername('')
+        })
     }
   }
 
@@ -54,11 +56,11 @@ const StoryContributors = ({ storyId }: Props) => {
 
       <div className="mt-4 flex gap-2">
         <input
-          type="number"
-          value={userId}
-          onChange={(e) => setUserId(Number(e.target.value))}
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           className="input input-bordered"
-          placeholder="User ID"
+          placeholder="Username"
         />
         <button className="btn btn-primary" onClick={handleAdd}>
           Add

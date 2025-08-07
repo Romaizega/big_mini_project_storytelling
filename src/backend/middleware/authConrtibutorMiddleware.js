@@ -1,4 +1,4 @@
-const storyModel = require('../models/contributors_model');
+const storyModel = require('../models/stories_model');
 
 const authorizeStoryAuthor = async (req, res, next) => {
   const { story_id, } = req.params; 
