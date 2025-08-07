@@ -12,7 +12,7 @@ module.exports = {
       ssl: { rejectUnauthorized: false },
     },
     migrations: {
-      directory: './migrations',
+      directory: './src/backend/migrations',
     },
     seeds: {
       directory: './seeds',
@@ -23,7 +23,7 @@ module.exports = {
     client: 'pg',
     connection: process.env.DATABASE_URL, // Render/Neon
     migrations: {
-      directory: './migrations',
+      directory: './src/backend/migrations',
     },
     seeds: {
       directory: './seeds',
